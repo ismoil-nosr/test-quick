@@ -1,14 +1,16 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\User;
 
 use App\Factories\NotifyProviderFactory;
+use App\Http\Controllers\Controller;
+use App\Http\Requests\User\UserSettings\ConfirmRequest;
+use App\Http\Requests\User\UserSettings\RequestConfirmRequest;
 use App\Repositories\User\UserRepositoryInterface;
-use Illuminate\Http\Request;
 
 class UserSettingsController extends Controller
 {
-    public function requestConfirm(Request $request): array
+    public function requestConfirm(RequestConfirmRequest $request): array
     {
         // логика получения авториозванного пользователя
         $user = new class{}; 
@@ -19,7 +21,7 @@ class UserSettingsController extends Controller
         return ['message' => 'OTP code sent'];
     }
 
-    public function confirm(Request $request, UserRepositoryInterface $userRepository): array
+    public function confirm(ConfirmRequest $request, UserRepositoryInterface $userRepository): array
     {
         // логика получения авториозванного пользователя
         $user = new class{}; 
