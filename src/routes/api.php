@@ -1,7 +1,6 @@
 <?php
 
-use App\Http\Controllers\UserSettingsController;
-use Illuminate\Http\Request;
+use App\Http\Controllers\User\UserSettingsController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -15,9 +14,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
+Route::prefix('user')->group(function () {
+    Route::post('/settings/request', [UserSettingsController::class, 'requestConfirm']);
+    Route::post('/settings/confirm', [UserSettingsController::class, 'confirm']);
 });
-
-Route::post('/user/settings/request', [UserSettingsController::class, 'requestConfirm']);
-Route::post('/user/settings/confirm', [UserSettingsController::class, 'confirm']);
